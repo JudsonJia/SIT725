@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express Calculator Server - SIT725 Task 2.2P</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .calculator {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 3px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
+            display: none;
+            color: #155724;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .api-examples {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .api-examples h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .api-examples h4 {
+            color: #6c757d;
+            margin: 15px 0 10px 0;
+            font-size: 1rem;
+        }
+
+        .endpoint {
+            background: #343a40;
+            color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 8px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Express Calculator</h1>
+    <p class="subtitle">SIT725 Task 2.2P - Express Web Server with Calculator Functionality</p>
+
+    <div class="calculator">
+        <h3>Interactive Calculator</h3>
+        <form id="calculatorForm">
+            <div class="grid">
+                <div class="form-group">
+                    <label for="num1">First Number:</label>
+                    <input type="number" id="num1" name="num1" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="num2">Second Number:</label>
+                    <input type="number" id="num2" name="num2" step="any" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="operation">Operation:</label>
+                <select id="operation" name="operation" required>
+                    <option value="add">Addition (+)</option>
+                    <option value="subtract">Subtraction (-)</option>
+                    <option value="multiply">Multiplication (×)</option>
+                    <option value="divide">Division (÷)</option>
+                </select>
+            </div>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        <div id="result" class="result">
+            <h4>Result:</h4>
+            <p id="resultText"></p>
+        </div>
+    </div>
+
+    <div class="api-examples">
+        <h3>API Endpoints</h3>
+        <p>You can test these endpoints directly in your browser or using tools like Postman:</p>
+
+        <h4>GET Requests (URL Parameters):</h4>
+        <div class="endpoint">GET /add/5/3 → Add 5 + 3</div>
+        <div class="endpoint">GET /subtract/10/4 → Subtract 10 - 4</div>
+        <div class="endpoint">GET /multiply/6/7 → Multiply 6 × 7</div>
+        <div class="endpoint">GET /divide/15/3 → Divide 15 ÷ 3</div>
+
+        <h4>GET Requests (Query Parameters):</h4>
+        <div class="endpoint">GET /add?num1=5&num2=3 → Add using query params</div>
+
+        <h4>API Documentation:</h4>
+        <div class="endpoint">GET /api → View all available endpoints</div>
+
+        <div class="grid">
+            <button onclick="testEndpoint('/add/5/3')">Test Addition</button>
+            <button onclick="testEndpoint('/subtract/10/4')">Test Subtraction</button>
+            <button onclick="testEndpoint('/multiply/6/7')">Test Multiplication</button>
+            <button onclick="testEndpoint('/divide/15/3')">Test Division</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Handle form submission
+    document.getElementById('calculatorForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const data = {
+            num1: formData.get('num1'),
+            num2: formData.get('num2'),
+            operation: formData.get('operation')
+        };
+
+        try {
+            const response = await fetch('/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                showResult(result.calculation, result.result);
+            } else {
+                showResult('Error: ' + result.error, '');
+            }
+        } catch (error) {
+            showResult('Error: ' + error.message, '');
+        }
+    });
+
+    function showResult(calculation, result) {
+        const resultDiv = document.getElementById('result');
+        const resultText = document.getElementById('resultText');
+
+        resultText.innerHTML = `
+                <strong>${calculation}</strong><br>
+                ${result !== '' ? `Result: <span style="font-size: 1.1em; color: #155724; font-weight: 500;">${result}</span>` : ''}
+            `;
+
+        resultDiv.classList.add('show');
+    }
+
+    // Test endpoint function
+    async function testEndpoint(endpoint) {
+        try {
+            const response = await fetch(endpoint);
+            const result = await response.json();
+
+            if (response.ok) {
+                showResult(result.calculation, result.result);
+            } else {
+                showResult('Error: ' + result.error, '');
+            }
+        } catch (error) {
+            showResult('Error: ' + error.message, '');
+        }
+    }
+
+    // Display server info
+    console.log('Express Calculator Server');
+    console.log('Visit /api for API documentation');
+    console.log('Interactive calculator available on this page');
+</script>
+</body>
+</html>
