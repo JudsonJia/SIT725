@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UAV Performance Analysis Platform</title>
+    <meta name="description" content="MEC-enabled UAV delivery system analysis platform">
+    <meta name="author" content="UAV Research Team">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Material Symbols for Drone Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=drone" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=drone_2" />
+    <!-- Custom Style Sheet-->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="teal darken-2">
+    <div class="nav-wrapper navbar-size">
+        <a href="#" class="brand-logo">
+            <span class="material-symbols-outlined" style="font-size: 2rem; margin-right: 10px;">drone</span>UAV Analysis
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#data">Data Upload</a></li>
+            <li><a href="#analysis">Analysis</a></li>
+            <li><a href="#visualization">Visualization</a></li>
+            <li><a href="#reports">Reports</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="main-body">
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="row">
+            <div class="col s12 center-align hero-section">
+                <h1 id="heading">UAV Performance Analysis & Visualization Platform</h1>
+                <p class="flow-text">
+                    Comprehensive analysis tools for MEC-enabled autonomous UAV delivery systems,
+                    helping researchers understand network degradation impact on UAV flight performance
+                </p>
+                <div class="hero-image center-align">
+                    <span class="material-symbols-outlined" style="font-size: 8rem; color: #333; margin: 30px 0; animation: float 3s ease-in-out infinite;">drone_2</span>
+                </div>
+                <a class="waves-effect waves-light btn-large teal modal-trigger" data-target="demoModal">
+                    <i class="material-icons left">play_arrow</i>Start Analysis
+                </a>
+            </div>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="row" id="feature-section">
+            <div class="col s12 center-align">
+                <h4 class="section-title">Platform Core Features</h4>
+            </div>
+        </div>
+        <div class="row" id="card-section">
+            <!-- Cards will be dynamically added here -->
+        </div>
+
+        <!-- Data Upload Section -->
+        <div class="row" id="data">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                            <span class="card-title">
+                                <i class="material-icons left">cloud_upload</i>Experimental Data Upload
+                            </span>
+                        <p>Upload your UAV flight data for network degradation analysis</p>
+                        <div class="file-field input-field">
+                            <div class="btn teal">
+                                <span>Choose Files</span>
+                                <input type="file" multiple>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Supports .csv, .json, .txt formats">
+                            </div>
+                        </div>
+                        <a class="waves-effect waves-light btn teal" id="uploadBtn">
+                            <i class="material-icons left">send</i>Start Analysis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis Dashboard -->
+        <div class="row" id="analysis">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                            <span class="card-title">
+                                <i class="material-icons left">analytics</i>Real-time Analysis Dashboard
+                            </span>
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="card-panel teal lighten-4">
+                                    <h5>Network Quality</h5>
+                                    <div class="progress">
+                                        <div class="determinate" style="width: 70%"></div>
+                                    </div>
+                                    <p>Signal Strength: 70%</p>
+                                </div>
+                            </div>
+                            <div class="col s6">
+                                <div class="card-panel orange lighten-4">
+                                    <h5>Flight Accuracy</h5>
+                                    <div class="progress">
+                                        <div class="determinate" style="width: 85%"></div>
+                                    </div>
+                                    <p>Positioning Error: 15cm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3D Visualization Section -->
+        <div class="row" id="visualization">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                            <span class="card-title">
+                                <i class="material-icons left">3d_rotation</i>3D Flight Trajectory Visualization
+                            </span>
+                        <div class="center-align">
+                            <div class="visualization-placeholder">
+                                <i class="material-icons large">timeline</i>
+                                <p>Interactive 3D trajectory visualization will be displayed here</p>
+                                <a class="waves-effect waves-light btn teal" id="load3DBtn">
+                                    <i class="material-icons left">view_in_ar</i>Load 3D View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>UAV Analysis Demo</h4>
+            <p>Welcome to the UAV Performance Analysis Platform! This demo will guide you through the key features:</p>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="collection">
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle teal">flight_takeoff</i>
+                            <span class="title">Data Upload</span>
+                            <p>Upload experimental flight data from Crazyflie drones<br>
+                                Supports multiple formats and batch processing
+                            </p>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle orange">trending_up</i>
+                            <span class="title">Network Analysis</span>
+                            <p>Analyze correlation between network conditions and flight accuracy<br>
+                                Real-time monitoring of connectivity metrics
+                            </p>
+                        </li>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle green">3d_rotation</i>
+                            <span class="title">3D Visualization</span>
+                            <p>Interactive 3D trajectory reconstruction<br>
+                                Network quality overlays and error analysis
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-teal btn-flat">Got it!</a>
+        </div>
+    </div>
+</main>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>
