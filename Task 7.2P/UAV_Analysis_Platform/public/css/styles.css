@@ -1,0 +1,38 @@
+/* UAV Performance Analysis Platform - Minimal Custom Styles */
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+.hero-image .material-symbols-outlined {
+    animation: float 3s ease-in-out infinite;
+}
+
+#three-container {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ccc;
+    border-radius: 50%;
+    border-top-color: #26a69a;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
